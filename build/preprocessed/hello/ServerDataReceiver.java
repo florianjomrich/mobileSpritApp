@@ -21,10 +21,14 @@ public class ServerDataReceiver implements Runnable {
 
     HelloMIDlet currentMidlet;
     String currentCityLocation;
+    int indexForURL;
+    String titleForURL;
 
-    public ServerDataReceiver(HelloMIDlet currentMidlet,String currentCityLocation){
+    public ServerDataReceiver(HelloMIDlet currentMidlet,String currentCityLocation,int indexForURL, String titleForURL){
         this.currentMidlet = currentMidlet;
         this.currentCityLocation = currentCityLocation;
+        this.indexForURL=indexForURL;
+        this.titleForURL = titleForURL;
     }
 
     public void run() {
@@ -36,7 +40,7 @@ public class ServerDataReceiver implements Runnable {
      public String getDataFromServer(){
     HttpConnection httpConn = null;
     InputStream is = null;
-    String serverUrl = "http://www.clever-tanken.de/tankstelle_liste?spritsorte=3&r=5&ort="+currentCityLocation+"&lat=&lon=";
+    String serverUrl = "http://www.clever-tanken.de/tankstelle_liste?spritsorte="+indexForURL+"&r=5&ort="+currentCityLocation+"&lat=&lon=";
     String dataRead = "";
     try{
         httpConn = (HttpConnection)Connector.open(serverUrl);
@@ -101,7 +105,7 @@ public class ServerDataReceiver implements Runnable {
       private void handleReadData(String dataRead) {
         String delimiter = "<div id=\"tankstelle";
         String[] splittedData = split(dataRead,delimiter);
-    //  System.out.println(splittedData[1]);
+     // System.out.println(splittedData[1]);
         Vector alleTankstellen = new Vector();
         for(int index=1;index<splittedData.length;index++){
 
@@ -121,7 +125,9 @@ public class ServerDataReceiver implements Runnable {
             String name_location_NameDerTanke = split(name_location[0],"<div class=\"location_name\">")[1];
             String name_location_streetNumber = split(name_location[1],"<div class=\"location_street_number\">")[1];
             String name_location_ZIP_CODE = split(name_location[2],"<div class=\"location_zip_code_city\">")[1];
-            System.out.println(name_location_NameDerTanke);
+          //  System.out.println(name_location_NameDerTanke);
+          //    System.out.println(name_location_streetNumber);
+          //  System.out.println(name_location_ZIP_CODE);
 
 
 
@@ -129,7 +135,7 @@ public class ServerDataReceiver implements Runnable {
             //distance
              String[] distance = split(splittedData[index],"<div class=\"location_distance\">");
             distance = split(distance[1],"</div>");
-           // System.out.println(distance[0]);
+            //System.out.println(distance[0]);
 
             alleTankstellen.addElement(new Tankstelle(price[0],distance[0],name_location_NameDerTanke,name_location_streetNumber,name_location_ZIP_CODE));
         }
@@ -138,12 +144,22 @@ public class ServerDataReceiver implements Runnable {
     }
 
      private void displayReadData(Vector alleTankstellen) {
-       currentMidlet.switchDisplayable(null, currentMidlet.getList());
-        List currentList = currentMidlet.getList();
-       for(int index=0;index<5;index++){
+       currentMidlet.switchDisplayable(null, currentMidlet.getGasStations());
+        List currentList = currentMidlet.getGasStations();
+        if(alleTankstellen.size()<5){
+            for(int index=0;index<alleTankstellen.size();index++){
+                Tankstelle currentTankstelle = (Tankstelle) alleTankstellen.elementAt(index);
+           currentList.set(index, currentTankstelle.nameDerTankstelle+"\n"+currentTankstelle.priceOfFuel+" Euro \n"+currentTankstelle.name_location_streetNumber+"\n"+currentTankstelle.name_location_ZIP_CODE+"\n"+currentTankstelle.distanceToTankstelle, null);
+            }
+        }
+        else{
+            for(int index=0;index<5;index++){
            Tankstelle currentTankstelle = (Tankstelle) alleTankstellen.elementAt(index);
-           currentList.set(index, currentTankstelle.nameDerTankstelle+"\n"+currentTankstelle.priceOfFuel+"\n"+currentTankstelle.name_location_streetNumber+"\n"+currentTankstelle.name_location_ZIP_CODE+"\n"+currentTankstelle.distanceToTankstelle, null);
+           currentList.set(index, currentTankstelle.nameDerTankstelle+"\n"+currentTankstelle.priceOfFuel+" Euro \n"+currentTankstelle.name_location_streetNumber+"\n"+currentTankstelle.name_location_ZIP_CODE+"\n"+currentTankstelle.distanceToTankstelle, null);
        }
+        }
+       
+        currentList.setTitle(this.titleForURL);
     }
 
 

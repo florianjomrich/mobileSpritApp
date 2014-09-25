@@ -66,9 +66,11 @@ public class HelloMIDlet extends MIDlet implements CommandListener {
      private Command okCommand;
      private Command exitCommand1;
      private Command backCommand;
+     private Command exitCommand2;
      private Form SelectionScreen;
      private TextField cityLocationSelectionTextField;
-     private List list;
+     private ChoiceGroup choiceGroup;
+     private List GasStations;
      //</editor-fold>//GEN-END:|fields|0|
 
     /**
@@ -157,42 +159,79 @@ public class HelloMIDlet extends MIDlet implements CommandListener {
      */
     public void commandAction(Command command, Displayable displayable) {//GEN-END:|7-commandAction|0|7-preCommandAction
         // write pre-action user code here
-        if (displayable == SelectionScreen) {//GEN-BEGIN:|7-commandAction|1|19-preAction
-            if (command == exitCommand) {//GEN-END:|7-commandAction|1|19-preAction
+        if (displayable == GasStations) {//GEN-BEGIN:|7-commandAction|1|36-preAction
+            if (command == List.SELECT_COMMAND) {//GEN-END:|7-commandAction|1|36-preAction
+               // write pre-action user code here
+                GasStationsAction();//GEN-LINE:|7-commandAction|2|36-postAction
+               // write post-action user code here
+            } else if (command == backCommand) {//GEN-LINE:|7-commandAction|3|40-preAction
+               // write pre-action user code here
+                switchDisplayable(null, getSelectionScreen());//GEN-LINE:|7-commandAction|4|40-postAction
+               // write post-action user code here
+            } else if (command == exitCommand2) {//GEN-LINE:|7-commandAction|5|48-preAction
                 // write pre-action user code here
-                exitMIDlet();//GEN-LINE:|7-commandAction|2|19-postAction
+                exitMIDlet();//GEN-LINE:|7-commandAction|6|48-postAction
                 // write post-action user code here
-            } else if (command == okCommand) {//GEN-LINE:|7-commandAction|3|23-preAction
+            }//GEN-BEGIN:|7-commandAction|7|19-preAction
+        } else if (displayable == SelectionScreen) {
+            if (command == exitCommand) {//GEN-END:|7-commandAction|7|19-preAction
+                // write pre-action user code here
+                exitMIDlet();//GEN-LINE:|7-commandAction|8|19-postAction
+                // write post-action user code here
+            } else if (command == okCommand) {//GEN-LINE:|7-commandAction|9|23-preAction
 
                 //this.checkLocation();
                 //this.getDataFromServer();
                 if(getCityLocationSelectionTextField().size()!=0){
                       //start the internet connection in a new thread
-                    System.out.println(getCityLocationSelectionTextField().size()+"xxx");
-                Thread newServerConncetionThread = new Thread(new ServerDataReceiver(this,this.getCityLocationSelectionTextField().getString()));
+
+                    int selectedNumber = getChoiceGroup().getSelectedIndex();
+                    System.out.println(selectedNumber);
+                    int indexForURL = 0;
+                    String titleForURL = "";
+
+                 switch(selectedNumber){
+                     case 0:
+                         //Diesel
+                         //System.out.println("Diesel");
+                         titleForURL="Diesel";
+                         indexForURL=3;
+                         break;
+                     case 1:
+                         //Super E10
+                         titleForURL="Super E10";
+                         indexForURL=5;
+                         break;
+                     case 2:
+                         //Super E5
+                         titleForURL="Super E5";
+                         indexForURL=7;
+                         break;
+                     case 3:
+                         indexForURL=8;
+                         titleForURL="Erdgas";
+                         //Erdgas
+                         break;
+                     default:
+
+                 }
+
+
+
+                Thread newServerConncetionThread = new Thread(new ServerDataReceiver(this,this.getCityLocationSelectionTextField().getString(),indexForURL,titleForURL));
                 newServerConncetionThread.start();
                 }
                 else{
                     getCityLocationSelectionTextField().setLabel("Select your city first:");
                 }
 
-//GEN-LINE:|7-commandAction|4|23-postAction
+//GEN-LINE:|7-commandAction|10|23-postAction
                 // write post-action user code here
-            }//GEN-BEGIN:|7-commandAction|5|36-preAction
-        } else if (displayable == list) {
-            if (command == List.SELECT_COMMAND) {//GEN-END:|7-commandAction|5|36-preAction
-               // write pre-action user code here
-                listAction();//GEN-LINE:|7-commandAction|6|36-postAction
-               // write post-action user code here
-            } else if (command == backCommand) {//GEN-LINE:|7-commandAction|7|40-preAction
-               // write pre-action user code here
-                switchDisplayable(null, getSelectionScreen());//GEN-LINE:|7-commandAction|8|40-postAction
-               // write post-action user code here
-            }//GEN-BEGIN:|7-commandAction|9|7-postCommandAction
-        }//GEN-END:|7-commandAction|9|7-postCommandAction
+            }//GEN-BEGIN:|7-commandAction|11|7-postCommandAction
+        }//GEN-END:|7-commandAction|11|7-postCommandAction
         // write post-action user code here
-    }//GEN-BEGIN:|7-commandAction|10|
-    //</editor-fold>//GEN-END:|7-commandAction|10|
+    }//GEN-BEGIN:|7-commandAction|12|
+    //</editor-fold>//GEN-END:|7-commandAction|12|
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Getter: exitCommand ">//GEN-BEGIN:|18-getter|0|18-preInit
     /**
@@ -217,7 +256,7 @@ public class HelloMIDlet extends MIDlet implements CommandListener {
     public Form getSelectionScreen() {
         if (SelectionScreen == null) {//GEN-END:|14-getter|0|14-preInit
             // write pre-init user code here
-            SelectionScreen = new Form("Welcome", new Item[] { getCityLocationSelectionTextField() });//GEN-BEGIN:|14-getter|1|14-postInit
+            SelectionScreen = new Form("Welcome", new Item[] { getCityLocationSelectionTextField(), getChoiceGroup() });//GEN-BEGIN:|14-getter|1|14-postInit
             SelectionScreen.addCommand(getExitCommand());
             SelectionScreen.addCommand(getOkCommand());
             SelectionScreen.setCommandListener(this);//GEN-END:|14-getter|1|14-postInit
@@ -271,7 +310,7 @@ public class HelloMIDlet extends MIDlet implements CommandListener {
     public TextField getCityLocationSelectionTextField() {
         if (cityLocationSelectionTextField == null) {//GEN-END:|32-getter|0|32-preInit
             // write pre-init user code here
-            cityLocationSelectionTextField = new TextField("Please select your city/location", null, 32, TextField.ANY);//GEN-LINE:|32-getter|1|32-postInit
+            cityLocationSelectionTextField = new TextField("Please select your city/location", "Ruesselsheim", 32, TextField.ANY);//GEN-LINE:|32-getter|1|32-postInit
             // write post-init user code here
         }//GEN-BEGIN:|32-getter|2|
         return cityLocationSelectionTextField;
@@ -293,36 +332,37 @@ public class HelloMIDlet extends MIDlet implements CommandListener {
     }
     //</editor-fold>//GEN-END:|39-getter|2|
 
-    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: list ">//GEN-BEGIN:|34-getter|0|34-preInit
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: GasStations ">//GEN-BEGIN:|34-getter|0|34-preInit
     /**
-     * Returns an initiliazed instance of list component.
+     * Returns an initiliazed instance of GasStations component.
      * @return the initialized component instance
      */
-    public List getList() {
-        if (list == null) {//GEN-END:|34-getter|0|34-preInit
+    public List getGasStations() {
+        if (GasStations == null) {//GEN-END:|34-getter|0|34-preInit
             // write pre-init user code here
-            list = new List("list", Choice.IMPLICIT);//GEN-BEGIN:|34-getter|1|34-postInit
-            list.append("List Element 1", null);
-            list.append("List Element 2", null);
-            list.append("List Element 3", null);
-            list.append("List Element 4", null);
-            list.append("List Element 5", null);
-            list.addCommand(getBackCommand());
-            list.setCommandListener(this);
-            list.setSelectedFlags(new boolean[] { false, false, false, false, false });//GEN-END:|34-getter|1|34-postInit
+            GasStations = new List("list", Choice.IMPLICIT);//GEN-BEGIN:|34-getter|1|34-postInit
+            GasStations.append("List Element 1", null);
+            GasStations.append("List Element 2", null);
+            GasStations.append("List Element 3", null);
+            GasStations.append("List Element 4", null);
+            GasStations.append("List Element 5", null);
+            GasStations.addCommand(getBackCommand());
+            GasStations.addCommand(getExitCommand2());
+            GasStations.setCommandListener(this);
+            GasStations.setSelectedFlags(new boolean[] { false, false, false, false, false });//GEN-END:|34-getter|1|34-postInit
             // write post-init user code here
         }//GEN-BEGIN:|34-getter|2|
-        return list;
+        return GasStations;
     }
     //</editor-fold>//GEN-END:|34-getter|2|
 
-    //<editor-fold defaultstate="collapsed" desc=" Generated Method: listAction ">//GEN-BEGIN:|34-action|0|34-preAction
+    //<editor-fold defaultstate="collapsed" desc=" Generated Method: GasStationsAction ">//GEN-BEGIN:|34-action|0|34-preAction
     /**
-     * Performs an action assigned to the selected list element in the list component.
+     * Performs an action assigned to the selected list element in the GasStations component.
      */
-    public void listAction() {//GEN-END:|34-action|0|34-preAction
+    public void GasStationsAction() {//GEN-END:|34-action|0|34-preAction
         // enter pre-action user code here
-        String __selectedString = getList().getString(getList().getSelectedIndex());//GEN-BEGIN:|34-action|1|42-preAction
+        String __selectedString = getGasStations().getString(getGasStations().getSelectedIndex());//GEN-BEGIN:|34-action|1|42-preAction
         if (__selectedString != null) {
             if (__selectedString.equals("List Element 1")) {//GEN-END:|34-action|1|42-preAction
                 // write pre-action user code here
@@ -349,6 +389,45 @@ public class HelloMIDlet extends MIDlet implements CommandListener {
         // enter post-action user code here
     }//GEN-BEGIN:|34-action|12|
     //</editor-fold>//GEN-END:|34-action|12|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: exitCommand2 ">//GEN-BEGIN:|47-getter|0|47-preInit
+    /**
+     * Returns an initiliazed instance of exitCommand2 component.
+     * @return the initialized component instance
+     */
+    public Command getExitCommand2() {
+        if (exitCommand2 == null) {//GEN-END:|47-getter|0|47-preInit
+            // write pre-init user code here
+            exitCommand2 = new Command("Exit", Command.EXIT, 0);//GEN-LINE:|47-getter|1|47-postInit
+            // write post-init user code here
+        }//GEN-BEGIN:|47-getter|2|
+        return exitCommand2;
+    }
+    //</editor-fold>//GEN-END:|47-getter|2|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: choiceGroup ">//GEN-BEGIN:|50-getter|0|50-preInit
+    /**
+     * Returns an initiliazed instance of choiceGroup component.
+     * @return the initialized component instance
+     */
+    public ChoiceGroup getChoiceGroup() {
+        if (choiceGroup == null) {//GEN-END:|50-getter|0|50-preInit
+            // write pre-init user code here
+            choiceGroup = new ChoiceGroup("choiceGroup", Choice.EXCLUSIVE);//GEN-BEGIN:|50-getter|1|50-postInit
+            choiceGroup.append("Diesel", null);
+            choiceGroup.append("Super E10", null);
+            choiceGroup.append("Super E5", null);
+            choiceGroup.append("Erdgas", null);
+            choiceGroup.setSelectedFlags(new boolean[] { false, false, true, false });
+            choiceGroup.setFont(0, null);
+            choiceGroup.setFont(1, null);
+            choiceGroup.setFont(2, null);
+            choiceGroup.setFont(3, null);//GEN-END:|50-getter|1|50-postInit
+            // write post-init user code here
+        }//GEN-BEGIN:|50-getter|2|
+        return choiceGroup;
+    }
+    //</editor-fold>//GEN-END:|50-getter|2|
 
     /**
      * Returns a display instance.
