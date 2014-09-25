@@ -341,11 +341,11 @@ public class HelloMIDlet extends MIDlet implements CommandListener {
         if (GasStations == null) {//GEN-END:|34-getter|0|34-preInit
             // write pre-init user code here
             GasStations = new List("list", Choice.IMPLICIT);//GEN-BEGIN:|34-getter|1|34-postInit
-            GasStations.append("List Element 1", null);
-            GasStations.append("List Element 2", null);
-            GasStations.append("List Element 3", null);
-            GasStations.append("List Element 4", null);
-            GasStations.append("List Element 5", null);
+            GasStations.append("", null);
+            GasStations.append("", null);
+            GasStations.append("", null);
+            GasStations.append("", null);
+            GasStations.append("", null);
             GasStations.addCommand(getBackCommand());
             GasStations.addCommand(getExitCommand2());
             GasStations.setCommandListener(this);
@@ -364,23 +364,23 @@ public class HelloMIDlet extends MIDlet implements CommandListener {
         // enter pre-action user code here
         String __selectedString = getGasStations().getString(getGasStations().getSelectedIndex());//GEN-BEGIN:|34-action|1|42-preAction
         if (__selectedString != null) {
-            if (__selectedString.equals("List Element 1")) {//GEN-END:|34-action|1|42-preAction
+            if (__selectedString.equals("")) {//GEN-END:|34-action|1|42-preAction
                 // write pre-action user code here
 //GEN-LINE:|34-action|2|42-postAction
                 // write post-action user code here
-            } else if (__selectedString.equals("List Element 2")) {//GEN-LINE:|34-action|3|43-preAction
+            } else if (__selectedString.equals("")) {//GEN-LINE:|34-action|3|43-preAction
                 // write pre-action user code here
 //GEN-LINE:|34-action|4|43-postAction
                 // write post-action user code here
-            } else if (__selectedString.equals("List Element 3")) {//GEN-LINE:|34-action|5|44-preAction
+            } else if (__selectedString.equals("")) {//GEN-LINE:|34-action|5|44-preAction
                 // write pre-action user code here
 //GEN-LINE:|34-action|6|44-postAction
                 // write post-action user code here
-            } else if (__selectedString.equals("List Element 4")) {//GEN-LINE:|34-action|7|45-preAction
+            } else if (__selectedString.equals("")) {//GEN-LINE:|34-action|7|45-preAction
                 // write pre-action user code here
 //GEN-LINE:|34-action|8|45-postAction
                 // write post-action user code here
-            } else if (__selectedString.equals("List Element 5")) {//GEN-LINE:|34-action|9|46-preAction
+            } else if (__selectedString.equals("")) {//GEN-LINE:|34-action|9|46-preAction
                 // write pre-action user code here
 //GEN-LINE:|34-action|10|46-postAction
                 // write post-action user code here

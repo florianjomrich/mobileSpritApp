@@ -110,6 +110,8 @@ public class ServerDataReceiver implements Runnable {
         for(int index=1;index<splittedData.length;index++){
 
             //preis DONE
+            System.out.println(splittedData[index]);
+
             String[] price = split(splittedData[index],"<div class=\"price\">");
             price = split(price[1],"<sup>");
             //System.out.println(price[0]);
