@@ -68,16 +68,11 @@
                         </Component>
                     </Component>
                     <Component componentID="23" typeID="C#CommandEventSource">
-                        <Property name="eventHandler" typeID="C#EventHandler" value="R38"/>
                         <Property name="displayable" typeID="Cjavax.microedition.lcdui.Displayable" value="R14"/>
                         <Property name="command" typeID="Cjavax.microedition.lcdui.Command" value="R22"/>
-                        <Component componentID="38" typeID="C#SwitchDisplayableEventHandler">
-                            <Property name="eventSource" typeID="C#EventSource" value="R23"/>
-                            <Property name="displayable" typeID="Cjavax.microedition.lcdui.Displayable" value="R34"/>
-                        </Component>
                     </Component>
                     <Component componentID="32" typeID="Cjavax.microedition.lcdui.TextField">
-                        <Property name="instanceName" typeID="Pjava.lang.String" value="VtextField"/>
+                        <Property name="instanceName" typeID="Pjava.lang.String" value="VcityLocationSelectionTextField"/>
                         <Property name="label" typeID="Pjava.lang.String" value="VPlease select your city/location"/>
                         <Property name="itemCommandListener" typeID="C#ItemCommandListener" value="R17"/>
                         <Property name="maxSize" typeID="Pint" value="V32"/>

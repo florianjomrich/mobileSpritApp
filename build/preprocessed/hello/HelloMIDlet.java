@@ -67,7 +67,7 @@ public class HelloMIDlet extends MIDlet implements CommandListener {
      private Command exitCommand1;
      private Command backCommand;
      private Form SelectionScreen;
-     private TextField textField;
+     private TextField cityLocationSelectionTextField;
      private List list;
      //</editor-fold>//GEN-END:|fields|0|
 
@@ -166,12 +166,17 @@ public class HelloMIDlet extends MIDlet implements CommandListener {
 
                 //this.checkLocation();
                 //this.getDataFromServer();
-
-                //start the internet connection in a new thread
+                if(!getCityLocationSelectionTextField().getString().equals("")){
+                      //start the internet connection in a new thread
+                    System.out.println(getCityLocationSelectionTextField().getString()+"xxx");
                 Thread newServerConncetionThread = new Thread(new ServerDataReceiver(this));
                 newServerConncetionThread.start();
-                
-                switchDisplayable(null, getList());//GEN-LINE:|7-commandAction|4|23-postAction
+                }
+                else{
+                    getCityLocationSelectionTextField().setLabel("Select your city first:");
+                }
+
+//GEN-LINE:|7-commandAction|4|23-postAction
                 // write post-action user code here
             }//GEN-BEGIN:|7-commandAction|5|36-preAction
         } else if (displayable == list) {
@@ -212,7 +217,7 @@ public class HelloMIDlet extends MIDlet implements CommandListener {
     public Form getSelectionScreen() {
         if (SelectionScreen == null) {//GEN-END:|14-getter|0|14-preInit
             // write pre-init user code here
-            SelectionScreen = new Form("Welcome", new Item[] { getTextField() });//GEN-BEGIN:|14-getter|1|14-postInit
+            SelectionScreen = new Form("Welcome", new Item[] { getCityLocationSelectionTextField() });//GEN-BEGIN:|14-getter|1|14-postInit
             SelectionScreen.addCommand(getExitCommand());
             SelectionScreen.addCommand(getOkCommand());
             SelectionScreen.setCommandListener(this);//GEN-END:|14-getter|1|14-postInit
@@ -258,92 +263,92 @@ public class HelloMIDlet extends MIDlet implements CommandListener {
 
 
 
-    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: textField ">//GEN-BEGIN:|32-getter|0|32-preInit
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: cityLocationSelectionTextField ">//GEN-BEGIN:|32-getter|0|32-preInit
     /**
-     * Returns an initiliazed instance of textField component.
+     * Returns an initiliazed instance of cityLocationSelectionTextField component.
      * @return the initialized component instance
      */
-    public TextField getTextField() {
-        if (textField == null) {//GEN-END:|32-getter|0|32-preInit
+    public TextField getCityLocationSelectionTextField() {
+        if (cityLocationSelectionTextField == null) {//GEN-END:|32-getter|0|32-preInit
             // write pre-init user code here
-            textField = new TextField("Please select your city/location", null, 32, TextField.ANY);//GEN-LINE:|32-getter|1|32-postInit
+            cityLocationSelectionTextField = new TextField("Please select your city/location", null, 32, TextField.ANY);//GEN-LINE:|32-getter|1|32-postInit
             // write post-init user code here
         }//GEN-BEGIN:|32-getter|2|
-        return textField;
+        return cityLocationSelectionTextField;
     }
     //</editor-fold>//GEN-END:|32-getter|2|
 
-   //<editor-fold defaultstate="collapsed" desc=" Generated Getter: backCommand ">//GEN-BEGIN:|39-getter|0|39-preInit
-   /**
-    * Returns an initiliazed instance of backCommand component.
-    * @return the initialized component instance
-    */
-   public Command getBackCommand() {
-       if (backCommand == null) {//GEN-END:|39-getter|0|39-preInit
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: backCommand ">//GEN-BEGIN:|39-getter|0|39-preInit
+    /**
+     * Returns an initiliazed instance of backCommand component.
+     * @return the initialized component instance
+     */
+    public Command getBackCommand() {
+        if (backCommand == null) {//GEN-END:|39-getter|0|39-preInit
             // write pre-init user code here
-           backCommand = new Command("Back", Command.BACK, 0);//GEN-LINE:|39-getter|1|39-postInit
+            backCommand = new Command("Back", Command.BACK, 0);//GEN-LINE:|39-getter|1|39-postInit
             // write post-init user code here
-       }//GEN-BEGIN:|39-getter|2|
-       return backCommand;
-   }
-   //</editor-fold>//GEN-END:|39-getter|2|
+        }//GEN-BEGIN:|39-getter|2|
+        return backCommand;
+    }
+    //</editor-fold>//GEN-END:|39-getter|2|
 
-   //<editor-fold defaultstate="collapsed" desc=" Generated Getter: list ">//GEN-BEGIN:|34-getter|0|34-preInit
-   /**
-    * Returns an initiliazed instance of list component.
-    * @return the initialized component instance
-    */
-   public List getList() {
-       if (list == null) {//GEN-END:|34-getter|0|34-preInit
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: list ">//GEN-BEGIN:|34-getter|0|34-preInit
+    /**
+     * Returns an initiliazed instance of list component.
+     * @return the initialized component instance
+     */
+    public List getList() {
+        if (list == null) {//GEN-END:|34-getter|0|34-preInit
             // write pre-init user code here
-           list = new List("list", Choice.IMPLICIT);//GEN-BEGIN:|34-getter|1|34-postInit
-           list.append("List Element 1", null);
-           list.append("List Element 2", null);
-           list.append("List Element 3", null);
-           list.append("List Element 4", null);
-           list.append("List Element 5", null);
-           list.addCommand(getBackCommand());
-           list.setCommandListener(this);
-           list.setSelectedFlags(new boolean[] { false, false, false, false, false });//GEN-END:|34-getter|1|34-postInit
+            list = new List("list", Choice.IMPLICIT);//GEN-BEGIN:|34-getter|1|34-postInit
+            list.append("List Element 1", null);
+            list.append("List Element 2", null);
+            list.append("List Element 3", null);
+            list.append("List Element 4", null);
+            list.append("List Element 5", null);
+            list.addCommand(getBackCommand());
+            list.setCommandListener(this);
+            list.setSelectedFlags(new boolean[] { false, false, false, false, false });//GEN-END:|34-getter|1|34-postInit
             // write post-init user code here
-       }//GEN-BEGIN:|34-getter|2|
-       return list;
-   }
-   //</editor-fold>//GEN-END:|34-getter|2|
+        }//GEN-BEGIN:|34-getter|2|
+        return list;
+    }
+    //</editor-fold>//GEN-END:|34-getter|2|
 
-   //<editor-fold defaultstate="collapsed" desc=" Generated Method: listAction ">//GEN-BEGIN:|34-action|0|34-preAction
-   /**
-    * Performs an action assigned to the selected list element in the list component.
-    */
-   public void listAction() {//GEN-END:|34-action|0|34-preAction
+    //<editor-fold defaultstate="collapsed" desc=" Generated Method: listAction ">//GEN-BEGIN:|34-action|0|34-preAction
+    /**
+     * Performs an action assigned to the selected list element in the list component.
+     */
+    public void listAction() {//GEN-END:|34-action|0|34-preAction
         // enter pre-action user code here
-       String __selectedString = getList().getString(getList().getSelectedIndex());//GEN-BEGIN:|34-action|1|42-preAction
-       if (__selectedString != null) {
-           if (__selectedString.equals("List Element 1")) {//GEN-END:|34-action|1|42-preAction
+        String __selectedString = getList().getString(getList().getSelectedIndex());//GEN-BEGIN:|34-action|1|42-preAction
+        if (__selectedString != null) {
+            if (__selectedString.equals("List Element 1")) {//GEN-END:|34-action|1|42-preAction
                 // write pre-action user code here
 //GEN-LINE:|34-action|2|42-postAction
                 // write post-action user code here
-           } else if (__selectedString.equals("List Element 2")) {//GEN-LINE:|34-action|3|43-preAction
+            } else if (__selectedString.equals("List Element 2")) {//GEN-LINE:|34-action|3|43-preAction
                 // write pre-action user code here
 //GEN-LINE:|34-action|4|43-postAction
                 // write post-action user code here
-           } else if (__selectedString.equals("List Element 3")) {//GEN-LINE:|34-action|5|44-preAction
+            } else if (__selectedString.equals("List Element 3")) {//GEN-LINE:|34-action|5|44-preAction
                 // write pre-action user code here
 //GEN-LINE:|34-action|6|44-postAction
                 // write post-action user code here
-           } else if (__selectedString.equals("List Element 4")) {//GEN-LINE:|34-action|7|45-preAction
+            } else if (__selectedString.equals("List Element 4")) {//GEN-LINE:|34-action|7|45-preAction
                 // write pre-action user code here
 //GEN-LINE:|34-action|8|45-postAction
                 // write post-action user code here
-           } else if (__selectedString.equals("List Element 5")) {//GEN-LINE:|34-action|9|46-preAction
+            } else if (__selectedString.equals("List Element 5")) {//GEN-LINE:|34-action|9|46-preAction
                 // write pre-action user code here
 //GEN-LINE:|34-action|10|46-postAction
                 // write post-action user code here
-           }//GEN-BEGIN:|34-action|11|34-postAction
-       }//GEN-END:|34-action|11|34-postAction
+            }//GEN-BEGIN:|34-action|11|34-postAction
+        }//GEN-END:|34-action|11|34-postAction
         // enter post-action user code here
-   }//GEN-BEGIN:|34-action|12|
-   //</editor-fold>//GEN-END:|34-action|12|
+    }//GEN-BEGIN:|34-action|12|
+    //</editor-fold>//GEN-END:|34-action|12|
 
     /**
      * Returns a display instance.
