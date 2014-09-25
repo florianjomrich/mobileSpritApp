@@ -20,9 +20,11 @@ import javax.microedition.lcdui.List;
 public class ServerDataReceiver implements Runnable {
 
     HelloMIDlet currentMidlet;
+    String currentCityLocation;
 
-    public ServerDataReceiver(HelloMIDlet currentMidlet){
+    public ServerDataReceiver(HelloMIDlet currentMidlet,String currentCityLocation){
         this.currentMidlet = currentMidlet;
+        this.currentCityLocation = currentCityLocation;
     }
 
     public void run() {
@@ -34,7 +36,7 @@ public class ServerDataReceiver implements Runnable {
      public String getDataFromServer(){
     HttpConnection httpConn = null;
     InputStream is = null;
-    String serverUrl = "http://www.clever-tanken.de/tankstelle_liste?spritsorte=3&r=5&ort=Berlin&lat=&lon=";
+    String serverUrl = "http://www.clever-tanken.de/tankstelle_liste?spritsorte=3&r=5&ort="+currentCityLocation+"&lat=&lon=";
     String dataRead = "";
     try{
         httpConn = (HttpConnection)Connector.open(serverUrl);

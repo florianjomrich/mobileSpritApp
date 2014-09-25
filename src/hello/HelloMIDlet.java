@@ -166,10 +166,10 @@ public class HelloMIDlet extends MIDlet implements CommandListener {
 
                 //this.checkLocation();
                 //this.getDataFromServer();
-                if(!getCityLocationSelectionTextField().getString().equals("")){
+                if(getCityLocationSelectionTextField().size()!=0){
                       //start the internet connection in a new thread
-                    System.out.println(getCityLocationSelectionTextField().getString()+"xxx");
-                Thread newServerConncetionThread = new Thread(new ServerDataReceiver(this));
+                    System.out.println(getCityLocationSelectionTextField().size()+"xxx");
+                Thread newServerConncetionThread = new Thread(new ServerDataReceiver(this,this.getCityLocationSelectionTextField().getString()));
                 newServerConncetionThread.start();
                 }
                 else{
