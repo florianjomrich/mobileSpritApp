@@ -137,6 +137,15 @@ public class HelloMIDlet extends MIDlet implements CommandListener {
     public HelloMIDlet() {
     }
 
+    private void displayReadData(Vector alleTankstellen) {
+        switchDisplayable(null, getList());
+        List currentList = getList();
+       for(int index=0;index<5;index++){
+           Tankstelle currentTankstelle = (Tankstelle) alleTankstellen.elementAt(index);
+           currentList.set(index, currentTankstelle.nameDerTankstelle+"\n"+currentTankstelle.priceOfFuel+"\n"+currentTankstelle.name_location_streetNumber+"\n"+currentTankstelle.name_location_ZIP_CODE+"\n"+currentTankstelle.distanceToTankstelle, null);
+       }
+    }
+
     private void handleReadData(String dataRead) {
         String delimiter = "<div id=\"tankstelle";
         String[] splittedData = split(dataRead,delimiter);
@@ -170,8 +179,10 @@ public class HelloMIDlet extends MIDlet implements CommandListener {
             distance = split(distance[1],"</div>");
            // System.out.println(distance[0]);
 
-            alleTankstellen.addElement(new Tankstelle(price[0],distance[0],name_location_NameDerTanke));
+            alleTankstellen.addElement(new Tankstelle(price[0],distance[0],name_location_NameDerTanke,name_location_streetNumber,name_location_ZIP_CODE));
         }
+
+        displayReadData(alleTankstellen);
     }
 
    private String[] split(String original,String separator) {
