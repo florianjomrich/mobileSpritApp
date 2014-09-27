@@ -21,7 +21,7 @@ import javax.microedition.location.LocationProvider;
 /**
  * @author TestUser
  */
-public class HelloMIDlet extends MIDlet implements CommandListener {
+public class SpritApp extends MIDlet implements CommandListener {
 
     private boolean midletPaused = false;
 
@@ -75,9 +75,9 @@ public class HelloMIDlet extends MIDlet implements CommandListener {
      //</editor-fold>//GEN-END:|fields|0|
 
     /**
-     * The HelloMIDlet constructor.
+     * The SpritApp constructor.
      */
-    public HelloMIDlet() {
+    public SpritApp() {
     }
 
     

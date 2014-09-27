@@ -19,13 +19,13 @@ import javax.microedition.lcdui.List;
  */
 public class ServerDataReceiver implements Runnable {
 
-    HelloMIDlet currentMidlet;
+    SpritApp currentMidlet;
     String currentCityLocation;
     int indexForURL;
     String titleForURL;
     Integer distanceToGasStation;
 
-    public ServerDataReceiver(HelloMIDlet currentMidlet,String currentCityLocation,int indexForURL, String titleForURL,Integer distanceToGasStation){
+    public ServerDataReceiver(SpritApp currentMidlet,String currentCityLocation,int indexForURL, String titleForURL,Integer distanceToGasStation){
         this.currentMidlet = currentMidlet;
         this.currentCityLocation = currentCityLocation;
         this.indexForURL=indexForURL;
