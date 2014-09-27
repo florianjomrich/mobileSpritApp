@@ -61,7 +61,7 @@ public class ServerDataReceiver implements Runnable {
 //inefficient, therefore we use the
 //ByteArrayOutputStream.
                     baos.write(data, 0, dataSizeRead );
-                    System.out.println("Data Size Read = "+dataSizeRead);
+                  //  System.out.println("Data Size Read = "+dataSizeRead);
                 }
                 dataRead = new String(baos.toByteArray());
                 baos.close();
@@ -110,7 +110,7 @@ public class ServerDataReceiver implements Runnable {
         for(int index=1;index<splittedData.length;index++){
 
             //preis DONE
-            System.out.println(splittedData[index]);
+            //System.out.println(splittedData[index]);
 
             String[] price = split(splittedData[index],"<div class=\"price\">");
             price = split(price[1],"<sup>");

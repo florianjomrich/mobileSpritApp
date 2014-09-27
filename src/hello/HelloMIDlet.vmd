@@ -93,15 +93,15 @@
                         <Component componentID="51" typeID="C#ChoiceElement">
                             <Property name="string" typeID="Pjava.lang.String" value="VDiesel"/>
                         </Component>
-                        <Component componentID="53" typeID="C#ChoiceElement">
-                            <Property name="string" typeID="Pjava.lang.String" value="VSuper E10"/>
+                        <Component componentID="55" typeID="C#ChoiceElement">
+                            <Property name="string" typeID="Pjava.lang.String" value="VErdgas"/>
                         </Component>
                         <Component componentID="54" typeID="C#ChoiceElement">
                             <Property name="string" typeID="Pjava.lang.String" value="VSuper E5"/>
                             <Property name="selected" typeID="Pboolean" value="Vtrue"/>
                         </Component>
-                        <Component componentID="55" typeID="C#ChoiceElement">
-                            <Property name="string" typeID="Pjava.lang.String" value="VErdgas"/>
+                        <Component componentID="53" typeID="C#ChoiceElement">
+                            <Property name="string" typeID="Pjava.lang.String" value="VSuper E10"/>
                         </Component>
                     </Component>
                 </Component>
@@ -160,8 +160,8 @@
         </Component>
     </Document>
     <FlowScene version="1">
-        <Node componentID="14" descriptorID="componentNode14" x="279" y="162"/>
-        <Node componentID="34" descriptorID="componentNode34" x="585" y="244"/>
         <Node componentID="2" descriptorID="componentNode2" x="24" y="26"/>
+        <Node componentID="34" descriptorID="componentNode34" x="585" y="244"/>
+        <Node componentID="14" descriptorID="componentNode14" x="279" y="162"/>
     </FlowScene>
 </VisualDesign>

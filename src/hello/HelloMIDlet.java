@@ -186,7 +186,7 @@ public class HelloMIDlet extends MIDlet implements CommandListener {
                       //start the internet connection in a new thread
 
                     int selectedNumber = getChoiceGroup().getSelectedIndex();
-                    System.out.println(selectedNumber);
+                  //  System.out.println(selectedNumber);
                     int indexForURL = 0;
                     String titleForURL = "";
 
