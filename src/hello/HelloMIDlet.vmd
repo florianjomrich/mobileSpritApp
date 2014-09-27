@@ -62,7 +62,7 @@
                     <Property name="commands" typeID="1C#CommandEventSource" value="A2:3_R193_R23"/>
                     <Property name="title" typeID="Pjava.lang.String" value="VWelcome"/>
                     <Property name="commandListener" typeID="C#CommandListener" value="R7"/>
-                    <Property name="items" typeID="1Cjavax.microedition.lcdui.Item" value="A2:3_R323_R50"/>
+                    <Property name="items" typeID="1Cjavax.microedition.lcdui.Item" value="A3:3_R323_R503_R56"/>
                     <Component componentID="19" typeID="C#CommandEventSource">
                         <Property name="eventHandler" typeID="C#EventHandler" value="R20"/>
                         <Property name="displayable" typeID="Cjavax.microedition.lcdui.Displayable" value="R14"/>
@@ -103,6 +103,14 @@
                         <Component componentID="53" typeID="C#ChoiceElement">
                             <Property name="string" typeID="Pjava.lang.String" value="VSuper E10"/>
                         </Component>
+                    </Component>
+                    <Component componentID="56" typeID="Cjavax.microedition.lcdui.TextField">
+                        <Property name="instanceName" typeID="Pjava.lang.String" value="VmaxDistanceToGasStation"/>
+                        <Property name="label" typeID="Pjava.lang.String" value="Vmax. Distance to gas station"/>
+                        <Property name="itemCommandListener" typeID="C#ItemCommandListener" value="R17"/>
+                        <Property name="text" typeID="Pjava.lang.String" value="V5"/>
+                        <Property name="maxSize" typeID="Pint" value="V32"/>
+                        <Property name="constraints" typeID="Pint" value="V2"/>
                     </Component>
                 </Component>
                 <Component componentID="34" typeID="Cjavax.microedition.lcdui.List">

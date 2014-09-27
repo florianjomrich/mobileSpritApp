@@ -23,12 +23,14 @@ public class ServerDataReceiver implements Runnable {
     String currentCityLocation;
     int indexForURL;
     String titleForURL;
+    Integer distanceToGasStation;
 
-    public ServerDataReceiver(HelloMIDlet currentMidlet,String currentCityLocation,int indexForURL, String titleForURL){
+    public ServerDataReceiver(HelloMIDlet currentMidlet,String currentCityLocation,int indexForURL, String titleForURL,Integer distanceToGasStation){
         this.currentMidlet = currentMidlet;
         this.currentCityLocation = currentCityLocation;
         this.indexForURL=indexForURL;
         this.titleForURL = titleForURL;
+        this.distanceToGasStation = distanceToGasStation;
     }
 
     public void run() {
@@ -40,7 +42,7 @@ public class ServerDataReceiver implements Runnable {
      public String getDataFromServer(){
     HttpConnection httpConn = null;
     InputStream is = null;
-    String serverUrl = "http://www.clever-tanken.de/tankstelle_liste?spritsorte="+indexForURL+"&r=5&ort="+currentCityLocation+"&lat=&lon=";
+    String serverUrl = "http://www.clever-tanken.de/tankstelle_liste?spritsorte="+indexForURL+"&r="+distanceToGasStation+"&ort="+currentCityLocation+"&lat=&lon=";
     String dataRead = "";
     try{
         httpConn = (HttpConnection)Connector.open(serverUrl);
@@ -149,9 +151,15 @@ public class ServerDataReceiver implements Runnable {
        currentMidlet.switchDisplayable(null, currentMidlet.getGasStations());
         List currentList = currentMidlet.getGasStations();
         if(alleTankstellen.size()<5){
-            for(int index=0;index<alleTankstellen.size();index++){
+            int index=0;
+            while(index<alleTankstellen.size()){
                 Tankstelle currentTankstelle = (Tankstelle) alleTankstellen.elementAt(index);
            currentList.set(index, currentTankstelle.nameDerTankstelle+"\n"+currentTankstelle.priceOfFuel+" Euro \n"+currentTankstelle.name_location_streetNumber+"\n"+currentTankstelle.name_location_ZIP_CODE+"\n"+currentTankstelle.distanceToTankstelle, null);
+           index++;
+            }
+            while(index<5){
+              currentList.set(index,"",null);
+              index++;
             }
         }
         else{

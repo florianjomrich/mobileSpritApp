@@ -70,6 +70,7 @@ public class HelloMIDlet extends MIDlet implements CommandListener {
      private Form SelectionScreen;
      private TextField cityLocationSelectionTextField;
      private ChoiceGroup choiceGroup;
+     private TextField maxDistanceToGasStation;
      private List GasStations;
      //</editor-fold>//GEN-END:|fields|0|
 
@@ -186,7 +187,7 @@ public class HelloMIDlet extends MIDlet implements CommandListener {
                       //start the internet connection in a new thread
 
                     int selectedNumber = getChoiceGroup().getSelectedIndex();
-                    System.out.println(selectedNumber);
+                  //  System.out.println(selectedNumber);
                     int indexForURL = 0;
                     String titleForURL = "";
 
@@ -218,7 +219,7 @@ public class HelloMIDlet extends MIDlet implements CommandListener {
 
 
 
-                Thread newServerConncetionThread = new Thread(new ServerDataReceiver(this,this.getCityLocationSelectionTextField().getString(),indexForURL,titleForURL));
+                Thread newServerConncetionThread = new Thread(new ServerDataReceiver(this,this.getCityLocationSelectionTextField().getString(),indexForURL,titleForURL,Integer.valueOf(this.getMaxDistanceToGasStation().getString())));
                 newServerConncetionThread.start();
                 }
                 else{
@@ -256,7 +257,7 @@ public class HelloMIDlet extends MIDlet implements CommandListener {
     public Form getSelectionScreen() {
         if (SelectionScreen == null) {//GEN-END:|14-getter|0|14-preInit
             // write pre-init user code here
-            SelectionScreen = new Form("Welcome", new Item[] { getCityLocationSelectionTextField(), getChoiceGroup() });//GEN-BEGIN:|14-getter|1|14-postInit
+            SelectionScreen = new Form("Welcome", new Item[] { getCityLocationSelectionTextField(), getChoiceGroup(), getMaxDistanceToGasStation() });//GEN-BEGIN:|14-getter|1|14-postInit
             SelectionScreen.addCommand(getExitCommand());
             SelectionScreen.addCommand(getOkCommand());
             SelectionScreen.setCommandListener(this);//GEN-END:|14-getter|1|14-postInit
@@ -428,6 +429,21 @@ public class HelloMIDlet extends MIDlet implements CommandListener {
         return choiceGroup;
     }
     //</editor-fold>//GEN-END:|50-getter|2|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: maxDistanceToGasStation ">//GEN-BEGIN:|56-getter|0|56-preInit
+    /**
+     * Returns an initiliazed instance of maxDistanceToGasStation component.
+     * @return the initialized component instance
+     */
+    public TextField getMaxDistanceToGasStation() {
+        if (maxDistanceToGasStation == null) {//GEN-END:|56-getter|0|56-preInit
+            // write pre-init user code here
+            maxDistanceToGasStation = new TextField("max. Distance to gas station", "5", 32, TextField.NUMERIC);//GEN-LINE:|56-getter|1|56-postInit
+            // write post-init user code here
+        }//GEN-BEGIN:|56-getter|2|
+        return maxDistanceToGasStation;
+    }
+    //</editor-fold>//GEN-END:|56-getter|2|
 
     /**
      * Returns a display instance.
